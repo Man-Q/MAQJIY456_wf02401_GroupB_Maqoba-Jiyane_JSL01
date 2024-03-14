@@ -1,3 +1,4 @@
+
 function validateSyntax() {
     // Get the input value from the HTML input element with id 'petInput'
     let input = document.getElementById('petInput').value;
@@ -30,22 +31,20 @@ function validateSyntax() {
             }
         }
 
-
+        // Check if any special characters are found in the extracted string
         let specialCharacterFound = false;
         const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-
         specialCharacterFound = specialCharRegex.test(newInputString);
 
         // Regular expression to match alphabetic characters
         const regex = /[a-z]/;
         // Check if any alphabetic character is found in the extracted string
         const found = newInputString.match(regex);
-
         if (found) {
             stringFound = true; // Set stringFound flag to true if alphabetic character is found
         }
 
-        // Check if both string and number characters are present
+        // Check if both string and number characters are present, and no special characters are found
         if (numberFound && stringFound && !specialCharacterFound) {
             result = "Valid Syntax"; // Set result to indicate valid syntax
         } else {
