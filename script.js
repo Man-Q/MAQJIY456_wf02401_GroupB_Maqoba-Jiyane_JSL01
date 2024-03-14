@@ -20,27 +20,33 @@ function validateSyntax() {
         let numberFound = false;
 
         // Extract the part of input after 'pet_'
-        let newString = input.substring(4);
+        let newInputString = input.substring(4);
 
         // Loop through each character of the extracted string
-        for (let i = 0; i < newString.length; i++) {
+        for (let i = 0; i < newInputString.length; i++) {
             // Check if the character is a number
-            if (!isNaN(parseInt(newString[i]))) {
+            if (!isNaN(parseInt(newInputString[i]))) {
                 numberFound = true; // Set numberFound flag to true if a number is found
             }
         }
 
+
+        let specialCharacterFound = false;
+        const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+
+        specialCharacterFound = specialCharRegex.test(newInputString);
+
         // Regular expression to match alphabetic characters
         const regex = /[a-z]/;
         // Check if any alphabetic character is found in the extracted string
-        const found = newString.match(regex);
+        const found = newInputString.match(regex);
 
         if (found) {
             stringFound = true; // Set stringFound flag to true if alphabetic character is found
         }
 
         // Check if both string and number characters are present
-        if (numberFound && stringFound) {
+        if (numberFound && stringFound && !specialCharacterFound) {
             result = "Valid Syntax"; // Set result to indicate valid syntax
         } else {
             result = "Invalid Syntax"; // Set result to indicate invalid syntax
